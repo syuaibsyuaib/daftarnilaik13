@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../style/index.css">
+    <title>Data Siswa</title>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- no urut -->
+        <div class="custom-select">
+            <select id="noUrut">
+                <option>Pilih No. Urut</option>
+            </select>
+        </div>
+
+        <!-- nama siswa -->
+        <input type="text" placeholder="Nama Siswa">
+
+        <!-- nisn -->
+        <input type="number" placeholder="NISN Siswa">
+
+        <!-- jenis kelamin -->
+        <div class="custom-select">
+            <select id="jk">
+                <option>Pilih Jenis Kelamin</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+        </div>
+
+        <!-- simpan -->
+        <button id="simpan">Simpan</button>
+        <h5>Data siswa :</h5>
+        <table class="tblsiswa">
+                <tr class="head">
+                    <td>No.Urut</td>
+                    <td>Nama</td>
+                    <td>NISN</td>
+                    <td>Jenis Kelamin</td>
+                </tr>
+        </table>
+    </div>
+    <script src="../script/index.js"></script>
+    <script>
+        let sel = document.querySelectorAll("select"),
+            inp = document.querySelectorAll("input"),
+            tblsimpan = document.getElementById('simpan'),
+            datakelas = local.ambil("data kelas"),
+            prDataKelas = JSON.parse(datakelas);
+
+        for (let i = 1; i <= prDataKelas.jmlsiswa; i++) {
+            sel[0].options.add(new Option(i, i));
+        }
+
+        tblsimpan.addEventListener('click', function () {
+
+            nourut = sel[0].options[sel[0].selectedIndex].text,
+                namasiswa = inp[0].value,
+                nisn = inp[1].value,
+                jk = sel[1].options[sel[1].selectedIndex].text,
+                arr = [],
+                objsiswa = new Object();
+            let x;
+
+            objsiswa.nourut = nourut;
+            objsiswa.namasiswa = namasiswa;
+            objsiswa.nisn = nisn;
+            objsiswa.jk = jk;
+
+            if (local.ambil('data siswa') == null) {
+                arr.push(objsiswa);
+                local.simpan('data siswa', arr);
+            } else {
+                let sdhada = JSON.parse(local.ambil('data siswa'));
+                var lanjut = false;
+                    for (x in sdhada) {
+                    if (objsiswa.nourut == sdhada[x].nourut) {
+                        let confir = confirm('No.urut siswa ini sdh ada, Anda yakin ingin mengubahnya?');
+                        if (confir == true) {
+                            local.hapus('data siswa');
+                            sdhada[x].nourut = objsiswa.nourut;
+                            sdhada[x].namasiswa = objsiswa.namasiswa;
+                            sdhada[x].nisn = objsiswa.nisn;
+                            sdhada[x].jk = objsiswa.jk;
+                            local.simpan('data siswa', sdhada);
+                            lanjut = true;
+                            break;
+                        }
+                        lanjut = true;
+                    }
+                
+                }
+                if(lanjut === false){
+                    sdhada.push(objsiswa);
+                    local.simpan('data siswa', sdhada);
+                }
+            }
+            isicell();
+        });
+        
+        function buattabel(){
+            let tbl = document.getElementsByClassName('tblsiswa');
+            let isi = JSON.parse(local.ambil('data kelas'));
+            let jmlsiswa = isi.jmlsiswa;
+            for(let i = 1;i <= jmlsiswa;i++){
+                let row = tbl[0].insertRow(i);
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                cell1.innerHTML = i;
+            }
+        }
+
+        function isicell() {
+            let cell = document.getElementsByTagName('td');
+            let isi = JSON.parse(local.ambil('data siswa')); 
+            let j = 5;
+            for (let i = 0; i < isi.length; i++) {
+                cell[j].innerHTML = isi[i].namasiswa;
+                cell[j+1].innerHTML = isi[i].nisn;
+                cell[j+2].innerHTML = isi[i].jk;
+                j+=4;
+            }
+            
+        }
+        buattabel();
+        isicell();
+    </script>
+</body>
+
+</html>

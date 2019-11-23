@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../../style/index.css">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h2</h2>
+        <a href="input.html">PPKn</a>
+        <a href="#">Bahasa Indonesia</a>
+        <a href="#">Matematika</a>
+        <a href="#">SBdP</a>
+    </div>
+    <style>
+        h2{
+            text-align: center;
+        }
+    </style>
+    <script>
+            let head2 = document.getElementsByTagName('h2');
+            let ambilParam = window.location.search;
+            let id = new URLSearchParams(ambilParam);
+        
+            switch (id.get('id')) {
+                case '1':
+                    head2[0].innerHTML = "SUBTEMA 1";
+                    break;
+                case '2':
+                    head2[0].innerHTML = "SUBTEMA 2";
+                    break;
+                case '3':
+                    head2[0].innerHTML = "SUBTEMA 3";
+                    break;
+                case '4':
+                    head2[0].innerHTML = "SUBTEMA 4";
+                    break;
+                case '5':
+                    head2[0].innerHTML = "SUBTEMA 5";
+                    break;
+                 default:
+                     window.location.assign('tema.html');
+            }
+        </script>
+</body>
+</html>

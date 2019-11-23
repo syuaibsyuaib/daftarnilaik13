@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../style/index.css">
+    <title>Data Kelas</title>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- kelas -->
+        <div class="custom-select">
+            <select id="kls">
+                <option>Pilih Kelas</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+        </div>
+
+        <!-- jumlah siswa -->
+        <input type="number" placeholder="Jumlah Siswa">
+
+        <!-- nama guru -->
+        <input type="text" placeholder="Nama Guru">
+
+        <!-- nip -->
+        <input type="number" placeholder="NIP Guru">
+
+        <!-- simpan -->
+        <button id="simpan" onclick="simpan()">Simpan</button>
+        <h5>Data Kelas :</h5>
+        <table class="tblsiswa">
+            <tr>
+                <td>Kelas</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Jumlah Siswa</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Nama Guru</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>NIP Guru</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <script src="../script/index.js"></script>
+    <script>
+        function simpan() {
+            let promise = new Promise(function (resolve, reject) {
+                let sel = document.querySelectorAll("select");
+                let inp = document.querySelectorAll("input");
+                let valkelas = sel[0].options[sel[0].selectedIndex].text;
+                let x;
+                let objkelas = new Object();
+
+                objkelas.kelas = valkelas;
+                objkelas.jmlsiswa = inp[0].value;
+                objkelas.guru = inp[1].value;
+                objkelas.nip = inp[2].value;
+              
+                if (local.ambil("data kelas") == null) {
+                    local.simpan("data kelas", objkelas);
+                    resolve("tersimpan");
+                }
+                else {
+                    if (confirm('Anda yakin ingin menimpa data kelas yang sudah ada?')) {
+                        local.simpan("data kelas", arr);
+                    } else {
+                        reject("tidak tersimpan");
+                    }
+                }
+            })
+
+            promise.then(function (result) {
+                alert(result);
+            }, function (err) {
+                alert(err);
+            });
+            isitable();
+        }
+
+        function isitable() {
+            let isi = JSON.parse(local.ambil('data kelas'));
+            let td = document.getElementsByTagName('td');
+            td[1].innerHTML = isi.kelas;
+            td[3].innerHTML = isi.jmlsiswa;
+            td[5].innerHTML = isi.guru;
+            td[7].innerHTML = isi.nip;
+        }
+        isitable();
+    </script>
+</body>
+
+</html>

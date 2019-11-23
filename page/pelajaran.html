@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../style/index.css">
+    <title>Document</title>
+    <style>
+        .wrap {
+            height: 60%;
+        }
+
+        .mulok {
+            width: 87%;
+            margin-right: 5px;
+        }
+
+        .tambah {
+            width: 10%;
+            height: 40px;
+        }
+
+        .marginatas {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="kkm.html">KKM</a>
+        <div id="wrapinput">
+            <input class="mulok inpmulok" type="text" placeholder="Nama Muatan Lokal"><button class="tambah">+</button>
+        </div>
+
+        <button id="simpan">Simpan</button>
+    </div>
+    <script src="../script/index.js"></script>
+    <script>
+        let wrapinput = document.getElementById('wrapinput');
+        let tambah = document.getElementsByClassName('tambah')[0];
+        let simpan = document.getElementById('simpan');
+        let inpmulok = document.getElementsByClassName('inpmulok');
+        tambah.addEventListener('click', function () {
+            let inp = document.createElement('INPUT');
+            inp.setAttribute('type', 'text');
+            inp.setAttribute('class', 'mulok marginatas inpmulok');
+            wrapinput.appendChild(inp);
+
+            let kurang = document.createElement('button');
+            kurang.innerHTML = '-';
+            kurang.setAttribute('class', 'tambah marginatas kurang');
+            kurang.setAttribute('onclick', 'hapus(event)');
+            wrapinput.appendChild(kurang);
+        })
+
+        function hapus(event) {
+            event.target.previousSibling.remove();
+            event.target.remove();
+        }
+
+        simpan.addEventListener('click', function () {
+            let arrmulok = [];
+            for (let i = 0;i < inpmulok.length;i++) {
+             arrmulok.push(inpmulok[i].value);          
+            }
+            
+            local.simpan('mulok', arrmulok);
+        })
+    </script>
+</body>
+
+</html>

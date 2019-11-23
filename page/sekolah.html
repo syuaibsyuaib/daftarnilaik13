@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="../style/index.css">
+  <title>Data Sekolah</title>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- alamat -->
+    <!-- provinsi -->
+    <div class="custom-select">
+      <select id="prov" onchange="fungsikab()">
+        <option>Pilih Provinsi</option>
+      </select>
+    </div>
+
+    <!-- kab/kota -->
+    <div class="custom-select">
+      <select id="kab" onchange="fungsikec()">
+        <option>Pilih Kab/Kota</option>
+      </select>
+    </div>
+
+    <!-- kecamatan -->
+    <div class="custom-select">
+      <select id="kec" onchange="fungsikel()">
+        <option>Pilih Kecamatan</option>
+      </select>
+    </div>
+
+    <!-- kelurahan -->
+    <div class="custom-select">
+      <select id="kel" onchange="fungsisek()">
+        <option>Pilih Kelurahan</option>
+      </select>
+    </div>
+
+    <!-- Sekolah -->
+    <div class="custom-select">
+      <select id="sek">
+        <option>Pilih Sekolah</option>
+      </select>
+    </div>
+
+    <!-- jalan -->
+    <input type="text" placeholder="Alamat sekolah">
+
+    <!-- nama kepsek -->
+    <input type="text" placeholder="Nama Kepsek">
+
+    <!-- nip -->
+    <input type="number" placeholder="NIP Kepsek">
+
+    <!-- simpan -->
+    <button id="simpan" onclick="simpan()">Simpan</button>
+    <h5>Data Sekolah :</h5>
+    <table class="tblsiswa">
+      <tr>
+        <td>Provinsi</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Kab/Kota</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Kecamatan</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Kelurahan</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Nama Sekolah</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Alamat Sekolah</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Nama Kepala Sekolah</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>NIP Kepala Sekolah</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <script src='../script/datasekolah.js'></script>
+  <script src='../script/index.js'></script>
+  <script>
+    var dataprov = sekolahku().dataSekolah;
+
+    var prov = document.getElementById("prov");
+    var kab = document.getElementById("kab");
+    var kec = document.getElementById("kec");
+    var kel = document.getElementById("kel");
+    var sek = document.getElementById("sek");
+
+    dataprov.forEach(function (element, key) {
+      prov[key + 1] = new Option(element.nama, key);
+    });
+
+    function fungsikab() {
+      while (kab.options.length > 1) {
+        kab.options.remove(1);
+      }
+      var datakab = sekolahku().dataSekolah[prov.value].kabupaten;
+      datakab.forEach(function (element, key) {
+        kab[key + 1] = new Option(element.nama, key);
+      });
+    }
+
+    function fungsikec() {
+      while (kec.options.length > 1) {
+        kec.options.remove(1);
+      }
+      var datakec = sekolahku().dataSekolah[prov.value].kabupaten[kab.value].kecamatan;
+      datakec.forEach(function (element, key) {
+        kec[key + 1] = new Option(element.nama, key);
+      });
+    }
+
+    function fungsikel() {
+      while (kel.options.length > 1) {
+        kel.options.remove(1);
+      }
+      var datakel = sekolahku().dataSekolah[prov.value].kabupaten[kab.value].kecamatan[kec.value].kelurahan;
+      datakel.forEach(function (element, key) {
+        kel[key + 1] = new Option(element.nama, key);
+      });
+    }
+
+    function fungsisek() {
+      while (sek.options.length > 1) {
+        sek.options.remove(1);
+      }
+      var datasek = sekolahku().dataSekolah[prov.value].kabupaten[kab.value].kecamatan[kec.value].kelurahan[kel.value].sekolah;
+      datasek.forEach(function (element, key) {
+        sek[key + 1] = new Option(element, key);
+      });
+    }
+
+    function simpan() {
+      var promise = new Promise(function (resolve, reject) {
+        var sel = document.querySelectorAll("select");
+        let valueprov = sel[0].options[sel[0].selectedIndex].text;
+        let valuekab = sel[1].options[sel[1].selectedIndex].text;
+        let valuekec = sel[2].options[sel[2].selectedIndex].text;
+        let valuekel = sel[3].options[sel[3].selectedIndex].text;
+        let valuesek = sel[4].options[sel[4].selectedIndex].text;
+        var inp = document.querySelectorAll("input");
+        var arr = [];
+        let objsekolah = new Object();
+
+        objsekolah.provinsi = valueprov;
+        objsekolah.kabupaten = valuekab;
+        objsekolah.kecamatan = valuekec;
+        objsekolah.kelurahan = valuekel;
+        objsekolah.sekolah = valuesek;
+        objsekolah.alamat = inp[0].value;
+        objsekolah.kepsek = inp[1].value;
+        objsekolah.nip = inp[2].value;
+
+        if (local.ambil("data sekolah") == null) {
+          local.simpan("data sekolah", objsekolah);
+          resolve("tersimpan");
+        }
+        else {
+          if (confirm('Anda yakin ingin menimpa data sekolah yang sudah ada?')) {
+            local.simpan("data sekolah", objsekolah);
+          } else {
+            reject("tidak tersimpan");
+          }
+        }
+      })
+
+      promise.then(function (result) {
+        alert(result);
+      }, function (err) {
+        alert(err);
+      });
+      isitabel();
+    }
+
+    function isitabel() {
+      let td = document.getElementsByTagName('td');
+      let isi = JSON.parse(local.ambil('data sekolah'));
+        td[1].innerHTML = isi.provinsi;
+        td[3].innerHTML = isi.kabupaten;
+        td[5].innerHTML = isi.kecamatan;
+        td[7].innerHTML = isi.kelurahan;
+        td[9].innerHTML = isi.sekolah;
+        td[11].innerHTML = isi.alamat;
+        td[13].innerHTML = isi.kepsek;
+        td[15].innerHTML = isi.nip;
+    }
+    isitabel();
+  </script>
+</body>
+
+</html>

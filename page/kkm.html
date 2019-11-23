@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../style/index.css">
+    <title>Document</title>
+    <style>
+        .kkmtable tr td,
+        .kkmtable {
+            border: none;
+            height: 10vh;
+        }
+
+        h2 {
+            height: 10vh;
+            text-align: center;
+        }
+
+        .wrap {
+            /* display: block; */
+            grid-template-rows: 15vh auto auto;
+        }
+
+        #headtable,
+        #inptable {
+            min-width: 120px;
+        }
+
+        #inptable {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <h2>Kriteria Ketuntasan Minimal</h2>
+        <table class='kkmtable'>
+            <tr>
+                <td id='headtable'>PPKn</td>
+                <td>:</td>
+                <td id='inptable'><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+            <tr>
+                <td>Bahasa Indonesia</td>
+                <td>:</td>
+                <td><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+            <tr>
+                <td>Matematika</td>
+                <td>:</td>
+                <td><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+            <tr>
+                <td>IPA</td>
+                <td>:</td>
+                <td><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+            <tr>
+                <td>IPS</td>
+                <td>:</td>
+                <td><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+            <tr>
+                <td>SBdP</td>
+                <td>:</td>
+                <td><input type="text" placeholder="rentang 0-100"></td>
+            </tr>
+        </table>
+        <button id='simpan'>Simpan</button>
+
+        <table class="tblsiswa">
+            <tr>
+                <td>PPKn</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Bahasa Indonesia</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Matematika</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>IPA</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>IPS</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>SBdP</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <script src="../script/index.js"></script>
+    <script>
+        let simpan = document.getElementById('simpan');
+        let inp = document.getElementsByTagName('input');
+        let kkm = new Object();
+        let sel = document.getElementsByTagName('td');
+        simpan.addEventListener('click', function () {
+           isitabel();
+        })
+
+        function isitabel() {
+            let tblsiswa = document.getElementsByClassName('tblsiswa');
+            let td = tblsiswa[0].getElementsByTagName('td');
+            let isi = JSON.parse(local.ambil('kkm'));
+            if(isi){
+                console.log('ada database kkm');
+                for(let x = 0;x<inp.length;x++){
+                    if(inp[x].value !== ""){
+                   
+                    }
+                }
+                confirm(`Ganti KKM ${}`);
+
+                push.inpval(inp[i].value);
+                
+            } else {
+                console.log('database kkm belum ada');
+                kkm.ppkn = inp[0].value;
+                kkm.bhsindonesia = inp[1].value;
+                kkm.matematika = inp[2].value;
+                kkm.ipa = inp[3].value;
+                kkm.ips = inp[4].value;
+                kkm.sbdp = inp[5].value
+                local.simpan('kkm', kkm);
+                isitabel();
+            }
+                    
+            td[1].innerHTML = isi.ppkn;
+            td[3].innerHTML = isi.bhsindonesia;
+            td[5].innerHTML = isi.matematika;
+            td[7].innerHTML = isi.ipa;
+            td[9].innerHTML = isi.ips;
+            td[11].innerHTML = isi.sbdp;
+        }
+        isitabel();
+    </script>
+</body>
+
+</html>
