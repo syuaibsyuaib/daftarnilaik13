@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	#confir{
+		display:none;
+		position:fixed;
+		width:200px;
+		height:150px;
+		border:solid black 1px;
+		top:30%;
+		left:50%;
+		transform:translate(-50%,-30%);
+		background-color:yellow;
+	}
+	#confir h2{
+		text-align:center;
+	}
+	#confir button{
+		margin-left:18%;
+	}
+	</style>
+</head>
+
+<body>
+<table>
+	<tr>
+		<td>PKn</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+	<tr>
+		<td>Bahasa Indonesia</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+	<tr>
+		<td>Matematika</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+	<tr>
+		<td>IPA</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+	<tr>
+		<td>IPS</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+	<tr>
+		<td>SBdP</td>
+		<td>:</td>
+		<td><input/></td>
+	</tr>
+</table>
+<button id='submit'>Submit</button>
+<div id='confir'>
+	<h2>Simpan mi kah?</h2>
+	<button id='yes'>Iya</button>
+	<button id='no'>Tidak</button>
+</div>
+<script>
+let td = document.getElementsByTagName('td');
+let inp = document.getElementsByTagName('input');
+let subm = document.getElementById('submit');
+let confir = document.getElementById('confir');
+let yes = document.getElementById('yes');
+let no = document.getElementById('no');
+let j = 0;
+let l;
+
+subm.addEventListener('click', function(){
+		dowork();
+	});
+	
+function prosesdata(){
+	for(;j < inp.length;j++){
+		if(inp[j].value !== ""){
+			l=j+(j+j);
+			console.log(td[l].innerText);
+		}
+	}
+}
+
+function konfirmasi(){
+confir.style.display = 'block';
+	yes.addEventListener('click', function(){
+		location.reload();
+	});
+	no.addEventListener('click', function(){
+		confir.style.display = 'none';
+	});
+}
+
+async function dowork(){
+	const prosesawal = await prosesdata();
+	const prosesconfirm = await konfirmasi();
+}
+	
+
+</script>
+</body>
+</html>

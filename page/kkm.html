@@ -32,6 +32,10 @@
         #inptable {
             width: 100%;
         }
+
+        #cellppkn {
+            width: 60vw;
+        }
     </style>
 </head>
 
@@ -43,40 +47,40 @@
             <tr>
                 <td id='headtable'>PPKn</td>
                 <td>:</td>
-                <td id='inptable'><input type="text" placeholder="rentang 0-100"></td>
+                <td id='inptable'><input type="number" placeholder="rentang 0-100"></td>
             </tr>
             <tr>
                 <td>Bahasa Indonesia</td>
                 <td>:</td>
-                <td><input type="text" placeholder="rentang 0-100"></td>
+                <td><input type="number" placeholder="rentang 0-100"></td>
             </tr>
             <tr>
                 <td>Matematika</td>
                 <td>:</td>
-                <td><input type="text" placeholder="rentang 0-100"></td>
+                <td><input type="number" placeholder="rentang 0-100"></td>
             </tr>
             <tr>
                 <td>IPA</td>
                 <td>:</td>
-                <td><input type="text" placeholder="rentang 0-100"></td>
+                <td><input type="number" placeholder="rentang 0-100"></td>
             </tr>
             <tr>
                 <td>IPS</td>
                 <td>:</td>
-                <td><input type="text" placeholder="rentang 0-100"></td>
+                <td><input type="number" placeholder="rentang 0-100"></td>
             </tr>
             <tr>
                 <td>SBdP</td>
                 <td>:</td>
-                <td><input type="text" placeholder="rentang 0-100"></td>
+                <td><input type="number" placeholder="rentang 0-100"></td>
             </tr>
         </table>
         <button id='simpan'>Simpan</button>
 
         <table class="tblsiswa">
             <tr>
-                <td>PPKn</td>
-                <td></td>
+                <td id='cellppkn'>PPKn</td>
+                <td id="cellvalueppkn"></td>
             </tr>
             <tr>
                 <td>Bahasa Indonesia</td>
@@ -105,30 +109,32 @@
         let simpan = document.getElementById('simpan');
         let inp = document.getElementsByTagName('input');
         let kkm = new Object();
-        let sel = document.getElementsByTagName('td');
+        let td = document.getElementsByTagName('td');
+        let isi = JSON.parse(local.ambil('kkm'));
+        let tblsiswa = document.getElementsByClassName('tblsiswa');
+
         simpan.addEventListener('click', function () {
-           isitabel();
+            simpankkm();
         })
 
-        function isitabel() {
-            let tblsiswa = document.getElementsByClassName('tblsiswa');
-            let td = tblsiswa[0].getElementsByTagName('td');
-            let isi = JSON.parse(local.ambil('kkm'));
-            if(isi){
-                console.log('ada database kkm');
-                for(let x = 0;x<inp.length;x++){
-                    if(inp[x].value !== ""){
-                   
+        function simpankkm() {
+            if (isi) {
+                let j = 0;
+                let l;
+                for (; j < inp.length; j++) {
+                    if (inp[j].value !== "") {
+                        l = j + (j + j);
+                        let label_mp = td[l].innerText;
+                        let labelmp = label_mp.replace(/\s/g,'');
+                        isi[labelmp.toLocaleLowerCase()] = inp[j].value;
+                        local.simpan('kkm', isi);
                     }
                 }
-                confirm(`Ganti KKM ${}`);
-
-                push.inpval(inp[i].value);
-                
+                isitabel();
             } else {
-                console.log('database kkm belum ada');
+                console.log('membuat database KKM');
                 kkm.ppkn = inp[0].value;
-                kkm.bhsindonesia = inp[1].value;
+                kkm.bahasaindonesia = inp[1].value;
                 kkm.matematika = inp[2].value;
                 kkm.ipa = inp[3].value;
                 kkm.ips = inp[4].value;
@@ -136,15 +142,27 @@
                 local.simpan('kkm', kkm);
                 isitabel();
             }
-                    
-            td[1].innerHTML = isi.ppkn;
-            td[3].innerHTML = isi.bhsindonesia;
-            td[5].innerHTML = isi.matematika;
-            td[7].innerHTML = isi.ipa;
-            td[9].innerHTML = isi.ips;
-            td[11].innerHTML = isi.sbdp;
         }
+        function isitabel() {
+            let isi = JSON.parse(local.ambil('kkm'));
+            if (isi) {
+                console.log('mengisi tabel');
+                td[19].innerHTML = isi.ppkn;
+                td[21].innerHTML = isi.bahasaindonesia;
+                td[23].innerHTML = isi.matematika;
+                td[25].innerHTML = isi.ipa;
+                td[27].innerHTML = isi.ips;
+                td[29].innerHTML = isi.sbdp;
+            } else {
+                console.log('database kosong');
+            }
+
+        }
+
         isitabel();
+
+        
+
     </script>
 </body>
 

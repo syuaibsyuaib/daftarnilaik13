@@ -12,27 +12,28 @@
 
 <body>
     <div class="wrap">
-        <!-- kelas -->
-        <div class="custom-select">
-            <select id="kls">
-                <option>Pilih Kelas</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
+        <div class="wrap inputwrap">
+            <div class="custom-select">
+                <select id="kls">
+                    <option>Pilih Kelas</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+
+            <!-- jumlah siswa -->
+            <input type="number" placeholder="Jumlah Siswa">
+
+            <!-- nama guru -->
+            <input type="text" placeholder="Nama Guru">
+
+            <!-- nip -->
+            <input type="number" placeholder="NIP Guru">
         </div>
-
-        <!-- jumlah siswa -->
-        <input type="number" placeholder="Jumlah Siswa">
-
-        <!-- nama guru -->
-        <input type="text" placeholder="Nama Guru">
-
-        <!-- nip -->
-        <input type="number" placeholder="NIP Guru">
 
         <!-- simpan -->
         <button id="simpan" onclick="simpan()">Simpan</button>
@@ -58,49 +59,57 @@
     </div>
     <script src="../script/index.js"></script>
     <script>
-        function simpan() {
-            let promise = new Promise(function (resolve, reject) {
-                let sel = document.querySelectorAll("select");
-                let inp = document.querySelectorAll("input");
-                let valkelas = sel[0].options[sel[0].selectedIndex].text;
-                let x;
-                let objkelas = new Object();
 
-                objkelas.kelas = valkelas;
-                objkelas.jmlsiswa = inp[0].value;
-                objkelas.guru = inp[1].value;
-                objkelas.nip = inp[2].value;
-              
+
+        function simpan() {
+            let sel = document.querySelectorAll("select");
+            let inp = document.querySelectorAll("input");
+            let valkelas = sel[0].options[sel[0].selectedIndex].text;
+            let x;
+            let objkelas = new Object();
+
+            objkelas.kelas = valkelas;
+            objkelas.jmlsiswa = inp[0].value;
+            objkelas.guru = inp[1].value;
+            objkelas.nip = inp[2].value;
+
+            if (valkelas == 'Pilih Kelas') {
+                alert('Pilih Kelas terlebih dahulu');
+                return;
+            }
+
+            let cekinp = local.isiinp(inp);
+
+
+            if (cekinp) {
                 if (local.ambil("data kelas") == null) {
                     local.simpan("data kelas", objkelas);
-                    resolve("tersimpan");
-                }
-                else {
+                    isitable();
+                    alert('tersimpan');
+                } else {
                     if (confirm('Anda yakin ingin menimpa data kelas yang sudah ada?')) {
-                        local.simpan("data kelas", arr);
-                    } else {
-                        reject("tidak tersimpan");
+                        local.simpan("data kelas", objkelas);
+                        isitable();
+                        alert('tersimpan');
                     }
                 }
-            })
-
-            promise.then(function (result) {
-                alert(result);
-            }, function (err) {
-                alert(err);
-            });
-            isitable();
+            }
         }
+
+        isitable();
 
         function isitable() {
             let isi = JSON.parse(local.ambil('data kelas'));
-            let td = document.getElementsByTagName('td');
-            td[1].innerHTML = isi.kelas;
-            td[3].innerHTML = isi.jmlsiswa;
-            td[5].innerHTML = isi.guru;
-            td[7].innerHTML = isi.nip;
+            if (isi) {
+                let td = document.getElementsByTagName('td');
+                td[1].innerHTML = isi.kelas;
+                td[3].innerHTML = isi.jmlsiswa;
+                td[5].innerHTML = isi.guru;
+                td[7].innerHTML = isi.nip;
+            }
+
         }
-        isitable();
+
     </script>
 </body>
 
