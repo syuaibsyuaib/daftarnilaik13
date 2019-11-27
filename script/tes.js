@@ -26,160 +26,127 @@ const kdpkn = {
         3.4: "3.4 Mengenal pengolahan bahan alam dan buatan dalam berkarya.",
         4.4: "4.4 Membuat hiasan dari bahan alam dan buatan."
     }
-function pemetaankd(kode) {
-    var x = [];
+const pemetaankd = function () {
     let kd = {
-        kls2smt1tm1sub1pb2mppkn: function () {
+        kls2smt1tm1sub1: {
+            mp: {
+                ppkn: {
+                    isikd: {
+                        1.1: kdpkn['1.1'],
+                        2.1: kdpkn['2.1'],
+                        3.1: kdpkn['3.1'],
+                        4.1: kdpkn['4.1']
+                    },
+                    pb: [2, 5, 6]
+                },
+                bind: {
+                    isikd: {
+                        3.1: kdbind['3.1'],
+                        4.1: kdbind['4.1']
+                    },
+                    pb: [1, 2, 3, 4, 5, 6]
+                },
+                mm: {
+                    isikd: { 3.1: kdmm['3.1'], 4.1: kdmm['4.1'] },
+                    pb: [1, 3, 4, 6]
+                },
+                sbdp: {
+                    isikd: { 3.2: kdsbdp['3.2'], 4.2: kdsbdp['4.2'] },
+                    pd: [1, 3, 4]
+                }
+            }
+
+        },
+        kls2smt1tm1sub2: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub1pb5mppkn: function () {
+        kls2smt1tm1sub3: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub1pb6mppkn: function () {
+        kls2smt1tm1sub4: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub2pb2mppkn: function () {
+        kls2smt1tm2sub1: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub2pb5mppkn: function () {
+        kls2smt1tm2sub2: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub2pb6mppkn: function () {
+        kls2smt1tm2sub3: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub3pb2mppkn: function () {
+        kls2smt1tm2sub4: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub3pb5mppkn: function () {
+        kls2smt1tm3sub1: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub3pb6mppkn: function () {
+        kls2smt1tm3sub2: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub4pb2mppkn: function () {
+        kls2smt1tm3sub3: function () {
             return {
                 isi: kdpkn,
                 kunci: Object.keys(kdpkn)
             };
         },
-        kls2smt1tm1sub4pb5mppkn: function () {
-            return {
-                isi: kdpkn,
-                kunci: Object.keys(kdpkn)
-            };
-        },
-        kls2smt1tm1sub4pb6mppkn: function () {
-            return {
-                isi: kdpkn,
-                kunci: Object.keys(kdpkn)
-            };
-        },
-        kls2smt1tm1sub1pb1mpbind: function () {
+        kls2smt1tm3sub4: function () {
             return {
                 isi: kdbind,
                 kunci: Object.keys(kdbind)
             };
         },
-        kls2smt1tm1sub1pb2mpbind: function () {
+        kls2smt1tm4sub1: function () {
             return {
                 isi: kdbind,
                 kunci: Object.keys(kdbind)
             };
         },
-        kls2smt1tm1sub1pb3mpbind: function () {
+        kls2smt1tm4sub2: function () {
             return {
                 isi: kdbind,
                 kunci: Object.keys(kdbind)
             };
         },
-        kls2smt1tm1sub1pb4mpbind: function () {
+        kls2smt1tm4sub3: function () {
             return {
                 isi: kdbind,
                 kunci: Object.keys(kdbind)
             };
         },
-        kls2smt1tm1sub1pb5mpbind: function () {
-            return {
-                isi: kdbind,
-                kunci: Object.keys(kdbind)
-            };
-        },
-        kls2smt1tm1sub1pb6mpbind: function () {
+        kls2smt1tm4sub4: function () {
             return {
                 isi: kdbind,
                 kunci: Object.keys(kdbind)
             };
         }
-        // kls2smt1tm1sub1pb2mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        // kls2smt1tm1sub1pb2mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        // kls2smt1tm1sub1pb3mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        // kls2smt1tm1sub1pb4mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        // kls2smt1tm1sub1pb5mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        // kls2smt1tm1sub1pb6mpbind: function () {
-        //     return {
-        //         isi: kdbind,
-        //         kunci: Object.keys(kdbind)
-        //     };
-        // },
-        
+    }
+    return kd;
 }
-
-
-// kelas, semester, tema, subtema, pembelajaran, mapel
-//1:pkn
-//2:bind
-//3:mm
-//4:sbdp
-
