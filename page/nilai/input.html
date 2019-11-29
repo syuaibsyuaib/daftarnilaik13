@@ -1,30 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="../../style/index.css">
     <title>Input Nilai</title>
-<style>
-    h2{
-        text-align: center;
-    }
-</style>
+    <style>
+        h2,
+        h3 {
+            text-align: center;
+        }
+
+        .kd input {
+            background: none;
+            color: #0563af;
+            box-shadow: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .mp {
+            width: 60%;
+            border-collapse: collapse;
+        }
+
+        tr,
+        td {
+            border-bottom: none;
+            border-top: none;
+        }
+    </style>
 </head>
+
 <body>
-        <h2>Masukkan Nilai Siswa Anda</h2>
-        <div class="wrap">
-            <p class="kd"></p>
-                <input type="text">
+    <h3 id="tema"></h3>
+    <h3 id="subtema"></h3>
+    <h2 id="pb"></h2>
+    <h2>Input Nilai Siswa</h2>
+    <div class="wrap">
+        <div class="custom-select">
+            <select id="s">
+                <option>Pilih Siswa</option>
+            </select>
         </div>
-   
+
+        <table class="tblsiswa">
+            <tr>
+                <th class="mp" colspan="2">Mata pelajaran</th>
+                <th>Nilai</th>
+            </tr>
+            <tr id="ppkn">
+                <th colspan="3">PPKn</th>
+            </tr>
+            <tr id="bind">
+                <th colspan="3">Bahasa Indonesia</th>
+            </tr>
+            <tr id="mm">
+                <th colspan="3">Matematika</th>
+            </tr>
+            <tr id="ipa">
+                <th colspan="3">IPA</th>
+            </tr>
+            <tr id="ips">
+                <th colspan="3">IPS</th>
+            </tr>
+            <tr id="sbdp">
+                <th colspan="3">SBDP</th>
+            </tr>
+        </table>
+    </div>
+
     <script src="../../script/tes.js"></script>
+    <script src="../../script/index.js"></script>
     <script>
-        // let kd = document.getElementsByClassName('kd');
+        let tema = document.getElementById('tema');
+        let subtema = document.getElementById('subtema');
+        let pb = document.getElementById('pb');
+        let ambilParam = window.location.search;
+        let id = new URLSearchParams(ambilParam);
         const kd = pemetaankd();
-        console.log(kd.kls2smt1tm1sub1);
-         
+
+        //////////////////    HEADER   /////////////////////
+        subtema.innerHTML = "SUBTEMA " + id.get('subtema');
+        tema.innerHTML = "TEMA " + id.get('tema');
+        pb.innerHTML = "PEMBELAJARAN " + id.get('pb');
+        /////////////     ISI TAG SELECT     ///////////////
+        let s = document.getElementById('s');
+        let datasiswa = JSON.parse(local.ambil('data siswa'));
+        let options = datasiswa;
+        options.forEach(function (element, key) {
+            s[key + 1] = new Option(element.namasiswa);
+        });
+        /////////////////////////////////////////////////
+        let tbl = document.getElementsByClassName('tblsiswa')[0];
+
+        //// step-1 : apakah kd mata pelajaran xxxx ada dalam pembelajaran saat ini?
+        let analis_ppkn = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ppkn');
+
+        /// *** perlu dirampingkan *** ///
+        let ppknisi = kd.kls2.smt1.tm1.sub1.ppkn.isikd;
+        
+        for (let i = 0; i < Object.keys(ppknisi).length; i++) {
+            if (analis_ppkn) {
+                rowmaker(tbl.rows.ppkn.rowIndex + 1, isicell(ppknisi, i))
+            }
+        }
+
+
+
+        ///////////////////////    AKAN DISATUKAN MENJADI OBJEK    ///////////////////////////
+        function analiskd(kelas, semester, tema, subtema, matapelajaran) {
+            let pembelajaran = kd[kelas][semester][tema][subtema][matapelajaran].pb;
+            for (let i = 0; i < pembelajaran.length; i++) {
+                if (pembelajaran[i] == id.get('pb')) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function isicell(mp, i){
+            let run = [Object.keys(mp)[i], mp[Object.keys(mp)[i]], "<input type='number'>"]
+            console.log(Object.keys(mp)[i]);
+            
+            return run
+        }
+
+        function rowmaker(indexrow, isicell) {
+            let newRow = tbl.insertRow(indexrow);
+            for (let j = 0; j < 3; j++) {
+                newRow.insertCell(j).innerHTML = isicell[j];
+            }
+        }
+
     </script>
 </body>
+
 </html>

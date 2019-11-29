@@ -15,41 +15,29 @@
 </head>
 
 <body>
+    <h2 id="tema"></h2>
     <div class="wrap">
-        <h2></h2>
-        <a href="subtema.html?id=1">SUBTEMA 1</a>
-
-        <a href="subtema.html?id=2">SUBTEMA 2</a>
-
-        <a href="subtema.html?id=3">SUBTEMA 3</a>
-
-        <a href="subtema.html?id=4">SUBTEMA 4</a>
+        <a>SUBTEMA 1</a>
+        <a>SUBTEMA 2</a>
+        <a>SUBTEMA 3</a>
+        <a>SUBTEMA 4</a>
     </div>
     <script>
-        let head2 = document.getElementsByTagName('h2');
+        let tema = document.getElementById('tema');
         let ambilParam = window.location.search;
         let id = new URLSearchParams(ambilParam);
-    
-        switch (id.get('id')) {
-            case '1':
-                head2[0].innerHTML = "TEMA 1";
-                console.log(id.get('id'));
-                break;
-            case '2':
-                head2[0].innerHTML = "TEMA 2";
-                break;
-            case '3':
-                head2[0].innerHTML = "TEMA 3";
-                break;
-            case '4':
-                head2[0].innerHTML = "TEMA 4";
-                break;
-            case '5':
-                head2[0].innerHTML = "TEMA 5";
-                break;
-             default:
-                 window.location.assign('../ulangan.html');
+        tema.innerHTML = "TEMA " + id.get('tema');
+
+        let link = document.getElementsByTagName('a');
+        for (let i = 0; i < link.length; i++) {
+            link[i].href = `subtema.html?tema=${id.get('tema')}&subtema=${i + 1}`
         }
+
+
+
+
+
+
     </script>
 </body>
 

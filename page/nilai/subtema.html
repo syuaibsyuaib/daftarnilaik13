@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,48 +8,61 @@
     <link rel="stylesheet" type="text/css" href="../../style/index.css">
     <title>Document</title>
     <style>
-
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <h2></h2>
-        <a href="input.html">Pembelajaran 1</a>
-        <a href="#">Pembelajaran 2</a>
-        <a href="#">Pembelajaran 3</a>
-        <a href="#">Pembelajaran 4</a>
-        <a href="#">Pembelajaran 5</a>
-        <a href="#">Pembelajaran 6</a>
-    </div>
-    <style>
-        h2{
+        h2,h3 {
             text-align: center;
         }
+
+        .kd input {
+            background: none;
+            color: #0563af;
+            box-shadow: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .mp {
+            width: 60%;
+            border-collapse: collapse;
+        }
+
+        tr,
+        td {
+            border-bottom: none;
+            border-top: none;
+        }
     </style>
+</head>
+
+<body>
+    <h3 id="tema"></h3>
+    <h2 id="subtema"></h2>
+    <div class="wrap">
+        <a>PEMBELAJARAN 1</a>
+        <a>PEMBELAJARAN 2</a>
+        <a>PEMBELAJARAN 3</a>
+        <a>PEMBELAJARAN 4</a>
+        <a>PEMBELAJARAN 5</a>
+        <a>PEMBELAJARAN 6</a>
+    </div>
+
     <script>
-            let head2 = document.getElementsByTagName('h2');
-            let ambilParam = window.location.search;
-            let id = new URLSearchParams(ambilParam);
-        
-            switch (id.get('id')) {
-                case '1':
-                    head2[0].innerHTML = "SUBTEMA 1";
-                    break;
-                case '2':
-                    head2[0].innerHTML = "SUBTEMA 2";
-                    break;
-                case '3':
-                    head2[0].innerHTML = "SUBTEMA 3";
-                    break;
-                case '4':
-                    head2[0].innerHTML = "SUBTEMA 4";
-                    break;
-                case '5':
-                    head2[0].innerHTML = "SUBTEMA 5";
-                    break;
-                 default:
-                     window.location.assign('tema.html');
-            }
-        </script>
+        let tema = document.getElementById('tema');
+        let subtema = document.getElementById('subtema');
+        let link = document.getElementsByTagName('a');
+        let ambilParam = window.location.search;
+        let id = new URLSearchParams(ambilParam);
+        subtema.innerHTML = "SUBTEMA " + id.get('subtema');
+        tema.innerHTML = "TEMA " + id.get('tema');
+
+        for (let i = 0; i < link.length; i++) {
+            link[i].href = `input.html?tema=${id.get('tema')}&subtema=${id.get('subtema')}&pb=${i + 1}`
+        }
+
+
+
+
+    </script>
 </body>
+
 </html>
