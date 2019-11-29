@@ -97,15 +97,20 @@
         /////////////////////////////////////////////////
         let tbl = document.getElementsByClassName('tblsiswa')[0];
 
-        //// step-1 : apakah kd mata pelajaran xxxx ada dalam pembelajaran saat ini?
+        //// step-1 : apakah kd mata pelajaran xxxx ada dalam pembelajaran saat ini? return true atau false
         let analis_ppkn = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ppkn');
+        let analis_bind = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'bind');
+        let analis_mm = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'mm');
+        // let analis_ipa = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ipa');
+        // let analis_ips = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ips');
+        let analis_sbdp = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'sbdp');
 
         /// *** perlu dirampingkan *** ///
-        let ppknisi = kd.kls2.smt1.tm1.sub1.ppkn.isikd;
+        let isi_ppkn = kd.kls2.smt1.tm1.sub1.ppkn.isikd;
         
-        for (let i = 0; i < Object.keys(ppknisi).length; i++) {
+        for (let i = 0; i < Object.keys(isi_ppkn).length; i++) {
             if (analis_ppkn) {
-                rowmaker(tbl.rows.ppkn.rowIndex + 1, isicell(ppknisi, i))
+                rowmaker(tbl.rows.ppkn.rowIndex + 1, isicell(isi_ppkn, i))
             }
         }
 
@@ -116,9 +121,13 @@
             let pembelajaran = kd[kelas][semester][tema][subtema][matapelajaran].pb;
             for (let i = 0; i < pembelajaran.length; i++) {
                 if (pembelajaran[i] == id.get('pb')) {
+                    console.log(true);
+                    
                     return true;
                 }
             }
+            console.log(false);
+            
             return false;
         }
 

@@ -60,7 +60,7 @@ const pemetaankd = function () {
                                 3.2: kdsbdp['3.2'],
                                 4.2: kdsbdp['4.2']
                             },
-                            pd: [1, 3, 4]
+                            pb: [1, 3, 4]
                         }
                     },
                     kls2smt1tm1sub2: function () {
