@@ -21,13 +21,18 @@
 
         <a href="nilai/tema.html?tema=4">TEMA 4</a>
 
-        <a href="nilai/tema.html?tema=5">TEMA 5</a>
+        <a id="tema5" href="nilai/tema.html?tema=5">TEMA 5</a>
 
         <a href="rekap.html">Mulok</a>
 
         <a href="rapor.html">Ekstrakurikuler</a>
+        <script src="../script/index.js"></script>
   <script>
-
+      let datakelas = JSON.parse(local.ambil('data kelas')); 
+      let tema5 = document.getElementById('tema5');
+      if(datakelas.kelas == 1 || 2){
+          tema5.remove();
+      }
   </script>
     </div>
 </body>

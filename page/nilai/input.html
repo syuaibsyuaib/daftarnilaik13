@@ -71,6 +71,12 @@
                 <th colspan="3">SBDP</th>
             </tr>
         </table>
+        <button id="simpan">SIMPAN</button>
+        <div>
+            <p style="font-size: 1em;">
+                Made in Syuaib <br> syuaibsyuaib@gmail.com
+            </p>
+        </div>
     </div>
 
     <script src="../../script/tes.js"></script>
@@ -82,69 +88,55 @@
         let ambilParam = window.location.search;
         let id = new URLSearchParams(ambilParam);
         const kd = pemetaankd();
+        
+        let param_all = {
+            tema: id.get('tema'),
+            subtema: id.get('subtema'),
+            pembelajaran: id.get('pb')
+        }
 
         //////////////////    HEADER   /////////////////////
-        subtema.innerHTML = "SUBTEMA " + id.get('subtema');
-        tema.innerHTML = "TEMA " + id.get('tema');
-        pb.innerHTML = "PEMBELAJARAN " + id.get('pb');
+        subtema.innerHTML = "SUBTEMA " + param_all.subtema;
+        tema.innerHTML = "TEMA " + param_all.tema;
+        pb.innerHTML = "PEMBELAJARAN " + param_all.pembelajaran;
+
         /////////////     ISI TAG SELECT     ///////////////
         let s = document.getElementById('s');
         let datasiswa = JSON.parse(local.ambil('data siswa'));
+        let datakelas = JSON.parse(local.ambil('data kelas'));
         let options = datasiswa;
         options.forEach(function (element, key) {
             s[key + 1] = new Option(element.namasiswa);
         });
         /////////////////////////////////////////////////
+
         let tbl = document.getElementsByClassName('tblsiswa')[0];
-
-        //// step-1 : apakah kd mata pelajaran xxxx ada dalam pembelajaran saat ini? return true atau false
-        let analis_ppkn = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ppkn');
-        let analis_bind = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'bind');
-        let analis_mm = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'mm');
-        // let analis_ipa = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ipa');
-        // let analis_ips = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'ips');
-        let analis_sbdp = analiskd('kls2', 'smt1', 'tm1', 'sub1', 'sbdp');
-
-        /// *** perlu diubah jadi fungsi *** ///
-        let isi_ppkn = kd.kls2.smt1.tm1.sub1.ppkn.isikd;
-        
-        for (let i = 0; i < Object.keys(isi_ppkn).length; i++) {
-            if (analis_ppkn) {
-                rowmaker(tbl.rows.ppkn.rowIndex + 1, isicell(isi_ppkn, i))
-            }
+        if (datakelas.kelas == 1 || 2) {
+            ipa.remove();
+            ips.remove();
         }
 
-//// INGAT!!!  IF(MATA PELAJARAN xxx == NULL){HAPUS ROWNYA DARI TABEL} ////
+        function mesin_utama() {
+            if (datakelas.kelas == 1 || 2) {
+                var batas = 4;
+            } else {
+                var batas = 6;
+            }
+            for (let indexmp = 0; indexmp < batas; indexmp++) {
+                let arrmp = ['ppkn', 'bind', 'mm', 'sbdp', 'ipa', 'ips'];
+                let analis = local.analiskd(`kls${datakelas.kelas}`, 'smt1', `tm${param_all.tema}`, `sub${param_all.subtema}`, arrmp[indexmp], param_all.pembelajaran);
+                let isikdmp = kd.kls2.smt1['tm' + param_all.tema]['sub' + param_all.subtema][arrmp[indexmp]].isikd;
+                console.log(arrmp[indexmp]);
 
-        ///////////////////////    AKAN DISATUKAN MENJADI OBJEK    ///////////////////////////
-        function analiskd(kelas, semester, tema, subtema, matapelajaran) {
-            let pembelajaran = kd[kelas][semester][tema][subtema][matapelajaran].pb;
-            for (let i = 0; i < pembelajaran.length; i++) {
-                if (pembelajaran[i] == id.get('pb')) {
-                    console.log(true);
-                    
-                    return true;
+                for (let i = 0; i < Object.keys(isikdmp).length; i++) {
+                    if (analis) {
+                        local.rowmaker(tbl.rows[arrmp[indexmp]].rowIndex + 1, local.isicell(isikdmp, i))
+                    }
                 }
             }
-            console.log(false);
-            
-            return false;
         }
 
-        function isicell(mp, i){
-            let run = [Object.keys(mp)[i], mp[Object.keys(mp)[i]], "<input type='number'>"]
-            console.log(Object.keys(mp)[i]);
-            
-            return run
-        }
-
-        function rowmaker(indexrow, isicell) {
-            let newRow = tbl.insertRow(indexrow);
-            for (let j = 0; j < 3; j++) {
-                newRow.insertCell(j).innerHTML = isicell[j];
-            }
-        }
-
+        mesin_utama();
     </script>
 </body>
 

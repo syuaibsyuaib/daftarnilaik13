@@ -63,99 +63,498 @@ const pemetaankd = function () {
                             pb: [1, 3, 4]
                         }
                     },
-                    kls2smt1tm1sub2: function () {
-                        return {
-                            isi: kdpkn,
-                            kunci: Object.keys(kdpkn)
-                        };
+                    sub2: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+
                     },
-                    kls2smt1tm1sub3: function () {
-                        return {
-                            isi: kdpkn,
-                            kunci: Object.keys(kdpkn)
-                        };
+                    sub3: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
                     },
-                    kls2smt1tm1sub4: function () {
-                        return {
-                            isi: kdpkn,
-                            kunci: Object.keys(kdpkn)
-                        };
+                    sub4: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
                     }
                 },
-                kls2smt1tm2sub1: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
+                tm2: {
+                    sub1: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub2: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+
+                    },
+                    sub3: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub4: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    }
                 },
-                kls2smt1tm2sub2: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
+                tm3: {
+                    sub1: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub2: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+
+                    },
+                    sub3: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub4: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    }
                 },
-                kls2smt1tm2sub3: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
-                },
-                kls2smt1tm2sub4: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
-                },
-                kls2smt1tm3sub1: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
-                },
-                kls2smt1tm3sub2: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
-                },
-                kls2smt1tm3sub3: function () {
-                    return {
-                        isi: kdpkn,
-                        kunci: Object.keys(kdpkn)
-                    };
-                },
-                kls2smt1tm3sub4: function () {
-                    return {
-                        isi: kdbind,
-                        kunci: Object.keys(kdbind)
-                    };
-                },
-                kls2smt1tm4sub1: function () {
-                    return {
-                        isi: kdbind,
-                        kunci: Object.keys(kdbind)
-                    };
-                },
-                kls2smt1tm4sub2: function () {
-                    return {
-                        isi: kdbind,
-                        kunci: Object.keys(kdbind)
-                    };
-                },
-                kls2smt1tm4sub3: function () {
-                    return {
-                        isi: kdbind,
-                        kunci: Object.keys(kdbind)
-                    };
-                },
-                kls2smt1tm4sub4: function () {
-                    return {
-                        isi: kdbind,
-                        kunci: Object.keys(kdbind)
-                    };
+                tm4: {
+                    sub1: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub2: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+
+                    },
+                    sub3: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    },
+                    sub4: {
+                        ppkn: {
+                            isikd: {
+                                1.1: kdpkn['1.1'],
+                                2.1: kdpkn['2.1'],
+                                3.1: kdpkn['3.1'],
+                                4.1: kdpkn['4.1']
+                            },
+                            pb: [2, 5, 6]
+                        },
+                        bind: {
+                            isikd: {
+                                3.1: kdbind['3.1'],
+                                4.1: kdbind['4.1']
+                            },
+                            pb: [1, 2, 3, 4, 5, 6]
+                        },
+                        mm: {
+                            isikd: {
+                                3.1: kdmm['3.1'],
+                                4.1: kdmm['4.1']
+                            },
+                            pb: [1, 3, 4, 6]
+                        },
+                        sbdp: {
+                            isikd: {
+                                3.2: kdsbdp['3.2'],
+                                4.2: kdsbdp['4.2']
+                            },
+                            pb: [1, 3, 4]
+                        }
+                    }
                 }
             }
-
         }
     }
 
