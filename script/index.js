@@ -17,7 +17,9 @@ let local = {
         }
         return true;
     },
-    analiskd : function (kelas, semester, tema, subtema, matapelajaran, pembelajaran) {
+    analiskd : function (pembelajaran) {
+        let ambilParam = window.location.search;
+        let id = new URLSearchParams(ambilParam);
         for (let i = 0; i < pembelajaran.length; i++) {
             if (pembelajaran[i] == id.get('pb')) {
                 return true;
@@ -28,7 +30,6 @@ let local = {
 
     isicell : function (mp, i) {
         let run = [Object.keys(mp)[i], mp[Object.keys(mp)[i]], "<input type='number'>"]
-        console.log(Object.keys(mp)[i]);
         return run
     },
 

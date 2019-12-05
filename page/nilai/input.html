@@ -85,10 +85,11 @@
         let tema = document.getElementById('tema');
         let subtema = document.getElementById('subtema');
         let pb = document.getElementById('pb');
+        let simpan = document.getElementById('simpan');
         let ambilParam = window.location.search;
         let id = new URLSearchParams(ambilParam);
         const kd = pemetaankd();
-        
+
         let param_all = {
             tema: id.get('tema'),
             subtema: id.get('subtema'),
@@ -124,19 +125,84 @@
             }
             for (let indexmp = 0; indexmp < batas; indexmp++) {
                 let arrmp = ['ppkn', 'bind', 'mm', 'sbdp', 'ipa', 'ips'];
-                let analis = local.analiskd(`kls${datakelas.kelas}`, 'smt1', `tm${param_all.tema}`, `sub${param_all.subtema}`, arrmp[indexmp], param_all.pembelajaran);
+                let analis = local.analiskd(kd.kls2.smt1['tm' + param_all.tema]['sub' + param_all.subtema][arrmp[indexmp]].pb);
                 let isikdmp = kd.kls2.smt1['tm' + param_all.tema]['sub' + param_all.subtema][arrmp[indexmp]].isikd;
-                console.log(arrmp[indexmp]);
 
                 for (let i = 0; i < Object.keys(isikdmp).length; i++) {
                     if (analis) {
                         local.rowmaker(tbl.rows[arrmp[indexmp]].rowIndex + 1, local.isicell(isikdmp, i))
+                        console.log(analis);
+
                     }
                 }
             }
         }
 
         mesin_utama();
+
+        simpan.addEventListener('click', function () {
+            // alert('tersimpan');
+            let obj1 = {}, obj2 = {}, objpb = {}, objsub = {}, objtm = {}, objsmt = {}, objkls = {}, objall = {}, objgrand = {}, objgrandall = {}, objgrandgrandall = {}, objsupergrandall = {};
+
+            for (let i = tbl.rows.length - 1; i > 0; i--) {
+                try {
+                    let isiinp = tbl.rows[i].lastElementChild.lastElementChild.value;
+                    let isikd = tbl.rows[i].firstElementChild.innerText;
+                    obj1[isikd] = isiinp;
+                } catch{
+                    let idrow = tbl.rows[i].id;
+                    obj2[idrow] = obj1;
+                    obj1 = {};
+                }
+            }
+
+            objpb[param_all.pembelajaran] = obj2;
+            objsub["pembelajaran"] = objpb;
+            objtm[param_all.subtema] = objsub;
+            objsmt["subtema"] = objtm;
+            objkls[param_all.tema] = objsmt;
+            objall["tema"] = objkls;
+            objgrand[1] = objall;
+            objgrandall["semester"] = objgrand;
+            objgrandgrandall[datakelas.kelas] = objgrandall;
+            objsupergrandall["kelas"] = objgrandgrandall;
+
+            // console.log(objsupergrandall);
+
+            if (local.ambil("tes")) {
+                const dbtes = JSON.parse(local.ambil("tes"));
+                let dbpb = {}, dbsub = {}, dbtm = {}, dbsmt = {}, dbkls = {}, keypb = {}, keysub = {}, keytm = {}, keysmt = {}, keykls = {};
+              
+                keytm = dbtes.kelas[2].semester[1].tema;
+                dbtm.tema = Object.assign(objkls, keytm);
+
+                keysub = dbtm.tema[param_all.tema].subtema;
+                dbsub.subtema = Object.assign(objtm, keysub);
+
+                keypb = dbsub.subtema[param_all.subtema].pembelajaran;
+                dbpb.pembelajaran = Object.assign(objpb, keypb);
+            
+                
+                dbkls = {
+                    kelas: {
+                        2: {
+                            semester: { 1: dbtm }
+                        }
+                    }
+                }
+                local.simpan("tes", dbkls);
+
+            } else {
+                local.simpan("tes", objsupergrandall);
+            }
+
+        });
+
+        function isidb(key, param, value) {
+            let hasil = key[param] = value;
+            return hasil;
+        }
+
     </script>
 </body>
 
