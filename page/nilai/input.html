@@ -170,19 +170,54 @@
             // console.log(objsupergrandall);
 
             if (local.ambil("tes")) {
-                const dbtes = JSON.parse(local.ambil("tes"));
+                let dbtes = JSON.parse(local.ambil("tes"));
                 let dbpb = {}, dbsub = {}, dbtm = {}, dbsmt = {}, dbkls = {}, keypb = {}, keysub = {}, keytm = {}, keysmt = {}, keykls = {};
-              
-                keytm = dbtes.kelas[2].semester[1].tema;
-                dbtm.tema = Object.assign(objkls, keytm);
+                //console.log(obj2);
 
-                keysub = dbtm.tema[param_all.tema].subtema;
-                dbsub.subtema = Object.assign(objtm, keysub);
+                savetm();
 
-                keypb = dbsub.subtema[param_all.subtema].pembelajaran;
-                dbpb.pembelajaran = Object.assign(objpb, keypb);
-            
-                
+                function savetm() {
+                    dbtm = dbtes.kelas[2].semester[1].tema; //yg sdh ada
+                    dbtm[param_all.tema] = objsmt; //objsmt ==> data baru
+                    local.simpan("tes", dbtes);
+                    console.log(1);
+                    savesub();
+                }
+
+                function savesub() {
+                    let dbtes1 = JSON.parse(local.ambil("tes"));
+                    let dbtm2 = dbtes1.kelas[2].semester[1].tema; //yg sdh ada
+                    dbtm2[param_all.tema] = objsmt; //objsmt ==> data baru
+                    dbsub = dbtm2[param_all.tema].subtema; //yg sdh ada
+                    dbsub[param_all.subtema] = objsub; //objsub ==> data baru
+                    local.simpan("tes", dbtes1);
+                    console.log(2);
+                    savepb();
+                };
+
+                function savepb() {
+                    let dbtes2 = JSON.parse(local.ambil("tes"));
+                    let dbtm3 = dbtes2.kelas[2].semester[1].tema; //yg sdh ada
+                    dbtm3[param_all.tema] = objsmt; //objsmt ==> data baru
+                    let dbsub2 = dbtm3[param_all.tema].subtema; //yg sdh ada
+                    dbsub2[param_all.subtema] = objsub; //objsub ==> data baru
+                    dbpb = dbsub2[param_all.subtema].pembelajaran;
+                    dbpb[param_all.pembelajaran] = obj2;
+                    local.simpan("tes", dbtes2);
+                    console.log(3);
+                }
+
+                //console.log(dbtes);
+                /*  1: subtema: 
+                        1: pembelajaran: {
+                            1: {…}
+                        }
+                    2: subtema: 
+                        1: pembelajaran: {
+                            2: {…}
+                        }
+                    */
+
                 dbkls = {
                     kelas: {
                         2: {
@@ -190,7 +225,7 @@
                         }
                     }
                 }
-                local.simpan("tes", dbkls);
+                // local.simpan("tes", dbkls);
 
             } else {
                 local.simpan("tes", objsupergrandall);
