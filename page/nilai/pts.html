@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../../style/index.css">
+    <title>Penilaian Akhir Semester</title>
+    <style>
+        h2{
+            text-align: center;
+            margin-top: 10vw;
+            padding: 1vw;
+        }
+    </style>
+</head>
+<body>
+    <h2>PENILAIAN TENGAH SEMESTER</h2>
+    <div class="wrap">
+        <a href="mp.html?tema=1&model=pts">TEMA 1</a>
+
+        <a href="mp.html?tema=2&model=pts">TEMA 2</a>
+
+        <a href="mp.html?tema=3&model=pts">TEMA 3</a>
+
+        <a href="mp.html?tema=4&model=pts">TEMA 4</a>
+
+        <a id="tema5" href="mp.html?tema=5&model=pts">TEMA 5</a>
+
+        <script src="../../script/index.js"></script>
+        <script>
+            let datakelas = JSON.parse(local.ambil('data kelas')); 
+            let tema5 = document.getElementById('tema5');
+            if(datakelas.kelas == 1 || 2){
+                tema5.remove();
+            }
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../../style/index.css">
+    <title>Document</title>
+    <style>
+        h2{
+            text-align: center;
+            margin-top: 10vw;
+            padding: 1vw;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="judulmodel"></h2>
+    <h2 id="judul"></h2>
+    <div class="wrap">
+        <a>PPKn</a>
+
+        <a href="mp.html?tema=2">Bahasa Indonesia</a>
+
+        <a href="mp.html?tema=3">Matematika</a>
+
+        <a id="ipa" href="mp.html?tema=4">IPA</a>
+
+        <a id="ips" href="mp.html?tema=5">IPS</a>
+
+        <a href="mp.html?tema=5">SBdP</a>
+
+        <script src="../../script/index.js"></script>
+        <script>
+            let datakelas = JSON.parse(local.ambil('data kelas'));
+            let ipa = document.getElementById('ipa');
+            let ips = document.getElementById('ips');
+            if (datakelas.kelas == 1 || 2) {
+                ipa.remove();
+                ips.remove();
+            }
+
+            let ambilParam = window.location.search;
+            let id = new URLSearchParams(ambilParam);
+            let judul = document.getElementById('judul');
+            let judulmodel = document.getElementById('judulmodel');
+            let model = {
+                pts : "PENILAIAN TENGAH SEMESTER",
+                pas : "PENILAIAN AKHIR SEMESTER"
+            }
+
+            judul.innerHTML = "TEMA "+id.get('tema');
+            judulmodel.innerHTML = model[id.get('model')];
+            
+        </script>
+</body>
+
+</html>
