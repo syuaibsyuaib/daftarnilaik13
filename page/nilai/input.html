@@ -167,53 +167,73 @@
             objgrandgrandall[datakelas.kelas] = objgrandall;
             objsupergrandall["kelas"] = objgrandgrandall;
 
-            // console.log(objsupergrandall);
+            //console.log(param_all.tema);
 
             if (local.ambil("tes")) {
-                //let dbpb = {}, dbsub = {}, dbtm = {}, dbsmt = {}, dbkls = {}, keypb = {}, keysub = {}, keytm = {}, keysmt = {}, keykls = {};
-                //console.log(obj2);
 
                 savetm();
 
+
+
                 function savetm() {
-                    const dbtes = JSON.parse(local.ambil("tes"));
+                    let dbtes = JSON.parse(local.ambil("tes"));
                     let dbtm = dbtes.kelas[2].semester[1].tema; //yg sdh ada
-                    dbtm[param_all.tema] = objsmt; //objsmt ==> data baru
-                    local.simpan("tes", dbtes);                   
-                    console.log(1);
-                    savesub();
+                    //let keytm = Object.keys(dbtm);
+
+                    if (katakunci('tema', dbtm)) {
+                        savesub()
+                    } else {
+                        dbtm[param_all.tema] = objsmt; //objsmt ==> data baru
+                        console.log("tema,subtema,pembelajaran diganti");
+                        local.simpan("tes", dbtes);
+                        savesub();
+                    }
+
                 }
 
                 function savesub() {
-                    const dbtes1 = JSON.parse(local.ambil("tes"));           
+                    let dbtes1 = JSON.parse(local.ambil("tes"));
                     let dbsub = dbtes1.kelas[2].semester[1].tema[param_all.tema].subtema; //yg sdh ada
-                    dbsub[param_all.subtema] = objsub; //objsub ==> data baru
-                    local.simpan("tes", dbtes1);
-                    console.log(2);
-                    savepb();
+
+                    if (katakunci('subtema', dbsub)) {
+                        savepb();
+                    } else {
+                        dbsub[param_all.subtema] = objsub; //objsub ==> data baru
+                        local.simpan("tes", dbtes1);
+                        savepb();
+                    }
+
                 };
 
                 function savepb() {
-                    const dbtes2 = JSON.parse(local.ambil("tes"));           
+                    let dbtes2 = JSON.parse(local.ambil("tes"));
                     let dbpb = dbtes2.kelas[2].semester[1].tema[param_all.tema].subtema[param_all.subtema].pembelajaran; //yg sdh ada
                     dbpb[param_all.pembelajaran] = obj2; //obj2 ==> data baru
                     local.simpan("tes", dbtes2);
-                    console.log(3);
                 }
-
-                //local.simpan("tes", dbkls);
-
             } else {
                 local.simpan("tes", objsupergrandall);
+                console.log("tidak ada 'tes'");
+
             }
 
         });
 
-        function isidb(key, param, value) {
-            let hasil = key[param] = value;
-            return hasil;
-        }
+        // function isidb(key, param, value) {
+        //     key[param] = value;
+        //     return key;
+        // }
 
+        function katakunci(nama, key) {
+            let keys = Object.keys(key);
+            for (let i = 0; i < keys.length; i++) {
+                if (param_all[nama] == keys[i]) {
+                    return true;
+                    break;
+                }
+            }
+            return false;
+        }
     </script>
 </body>
 
