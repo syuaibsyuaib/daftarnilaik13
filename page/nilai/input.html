@@ -170,16 +170,10 @@
             //console.log(param_all.tema);
 
             if (local.ambil("tes")) {
-
                 savetm();
-
-
-
                 function savetm() {
                     let dbtes = JSON.parse(local.ambil("tes"));
                     let dbtm = dbtes.kelas[2].semester[1].tema; //yg sdh ada
-                    //let keytm = Object.keys(dbtm);
-
                     if (katakunci('tema', dbtm)) {
                         savesub()
                     } else {
@@ -188,7 +182,6 @@
                         local.simpan("tes", dbtes);
                         savesub();
                     }
-
                 }
 
                 function savesub() {
@@ -213,16 +206,9 @@
                 }
             } else {
                 local.simpan("tes", objsupergrandall);
-                console.log("tidak ada 'tes'");
-
             }
 
         });
-
-        // function isidb(key, param, value) {
-        //     key[param] = value;
-        //     return key;
-        // }
 
         function katakunci(nama, key) {
             let keys = Object.keys(key);
