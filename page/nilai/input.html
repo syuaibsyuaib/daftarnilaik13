@@ -173,36 +173,40 @@
                 savetm();
                 function savetm() {
                     let dbtes = JSON.parse(local.ambil("tes"));
+                    console.log(dbtes);
+                    
                     let dbtm = dbtes.kelas[2].semester[1].tema; //yg sdh ada
+                    console.log(dbtm);
+                    
                     if (katakunci('tema', dbtm)) {
-                        savesub()
+                        savesub(dbtes);
                     } else {
                         dbtm[param_all.tema] = objsmt; //objsmt ==> data baru
                         console.log("tema,subtema,pembelajaran diganti");
-                        local.simpan("tes", dbtes);
-                        savesub();
+                        //local.simpan("tes", dbtes);
+                        savesub(dbtes);
                     }
                 }
 
-                function savesub() {
-                    let dbtes1 = JSON.parse(local.ambil("tes"));
-                    let dbsub = dbtes1.kelas[2].semester[1].tema[param_all.tema].subtema; //yg sdh ada
+                function savesub(dbtes) {
+                    //let dbtes1 = JSON.parse(local.ambil("tes"));
+                    let dbsub = dbtes.kelas[2].semester[1].tema[param_all.tema].subtema; //yg sdh ada
 
                     if (katakunci('subtema', dbsub)) {
-                        savepb();
+                        savepb(dbtes);
                     } else {
                         dbsub[param_all.subtema] = objsub; //objsub ==> data baru
-                        local.simpan("tes", dbtes1);
-                        savepb();
+                        //local.simpan("tes", dbtes1);
+                        savepb(dbtes);
                     }
 
                 };
 
-                function savepb() {
-                    let dbtes2 = JSON.parse(local.ambil("tes"));
-                    let dbpb = dbtes2.kelas[2].semester[1].tema[param_all.tema].subtema[param_all.subtema].pembelajaran; //yg sdh ada
+                function savepb(dbtes) {
+                    //let dbtes2 = JSON.parse(local.ambil("tes"));
+                    let dbpb = dbtes.kelas[2].semester[1].tema[param_all.tema].subtema[param_all.subtema].pembelajaran; //yg sdh ada
                     dbpb[param_all.pembelajaran] = obj2; //obj2 ==> data baru
-                    local.simpan("tes", dbtes2);
+                    local.simpan("tes", dbtes);
                 }
             } else {
                 local.simpan("tes", objsupergrandall);
