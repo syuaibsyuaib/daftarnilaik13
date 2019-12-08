@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,10 @@
     <link rel="stylesheet" type="text/css" href="../style/index.css">
     <title>Daftar Nilai SD K13</title>
     <style>
-     
+
     </style>
 </head>
+
 <body>
     <div class="wrap">
 
@@ -30,13 +32,21 @@
         <a href="nilai/pas.html">Akhir Semester</a>
 
         <script src="../script/index.js"></script>
-  <script>
-      let datakelas = JSON.parse(local.ambil('data kelas')); 
-      let tema5 = document.getElementById('tema5');
-      if(datakelas.kelas == 1 || 2){
-          tema5.remove();
-      }
-  </script>
+        <script>
+            try {
+                let datakelas = JSON.parse(local.ambil('data kelas'));
+                let tema5 = document.getElementById('tema5');
+                if (datakelas.kelas == 1 || 2) {
+                    tema5.remove();
+                }
+            } catch{
+                alert("data kelas belum ada, isi dulu!");
+                location.assign("./kelas.html");
+            }
+
+
+        </script>
     </div>
 </body>
+
 </html>
