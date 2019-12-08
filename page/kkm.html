@@ -111,7 +111,19 @@
         let kkm = new Object();
         let td = document.getElementsByTagName('td');
         let isi = JSON.parse(local.ambil('kkm'));
-        let tblsiswa = document.getElementsByClassName('tblsiswa');
+        let tblsiswa = document.getElementsByClassName('tblsiswa')[0];
+        let kkmtable = document.getElementsByClassName('kkmtable')[0];
+        let mp = ['ppkn', 'bahasaindonesia', 'matematika', 'sbdp', 'ipa', 'ips'];
+
+        let datakelas = JSON.parse(local.ambil('data kelas'));
+
+        if (datakelas.kelas == 1 || 2) {
+            for (let i = 0; i < 2; i++) {
+                tblsiswa.rows[3].remove();
+                kkmtable.rows[3].remove();
+            }
+
+        }
 
         simpan.addEventListener('click', function () {
             simpankkm();
@@ -125,7 +137,7 @@
                     if (inp[j].value !== "") {
                         l = j + (j + j);
                         let label_mp = td[l].innerText;
-                        let labelmp = label_mp.replace(/\s/g,'');
+                        let labelmp = label_mp.replace(/\s/g, '');
                         isi[labelmp.toLocaleLowerCase()] = inp[j].value;
                         local.simpan('kkm', isi);
                     }
@@ -133,26 +145,22 @@
                 isitabel();
             } else {
                 console.log('membuat database KKM');
-                kkm.ppkn = inp[0].value;
-                kkm.bahasaindonesia = inp[1].value;
-                kkm.matematika = inp[2].value;
-                kkm.ipa = inp[3].value;
-                kkm.ips = inp[4].value;
-                kkm.sbdp = inp[5].value
-                local.simpan('kkm', kkm);
-                isitabel();
+                
+                for (let i = 0; i < inp.length; i++) {
+                    kkm[mp[i]] = inp[i].value;
+                }
             }
+            local.simpan('kkm', kkm);
+            isitabel();
         }
+        
         function isitabel() {
             let isi = JSON.parse(local.ambil('kkm'));
             if (isi) {
+                for(let i=0;i<tblsiswa.rows.length;i++){
+                    tblsiswa.rows[i].cells[1].innerHTML = isi[mp[i]]; 
+                }
                 console.log('mengisi tabel');
-                td[19].innerHTML = isi.ppkn;
-                td[21].innerHTML = isi.bahasaindonesia;
-                td[23].innerHTML = isi.matematika;
-                td[25].innerHTML = isi.ipa;
-                td[27].innerHTML = isi.ips;
-                td[29].innerHTML = isi.sbdp;
             } else {
                 console.log('database kosong');
             }
@@ -161,7 +169,7 @@
 
         isitabel();
 
-        
+
 
     </script>
 </body>
