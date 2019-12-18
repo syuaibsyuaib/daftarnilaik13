@@ -11,6 +11,7 @@
 
 <body>
   <div class="wrap">
+    <h2 class="judul">Data Sekolah</h2>
     <!-- alamat -->
     <!-- provinsi -->
     <div class="custom-select">
@@ -150,59 +151,63 @@
     }
 
     function simpan() {
-      var promise = new Promise(function (resolve, reject) {
-        var sel = document.querySelectorAll("select");
-        let valueprov = sel[0].options[sel[0].selectedIndex].text;
-        let valuekab = sel[1].options[sel[1].selectedIndex].text;
-        let valuekec = sel[2].options[sel[2].selectedIndex].text;
-        let valuekel = sel[3].options[sel[3].selectedIndex].text;
-        let valuesek = sel[4].options[sel[4].selectedIndex].text;
-        var inp = document.querySelectorAll("input");
-        var arr = [];
-        let objsekolah = new Object();
+      var sel = document.querySelectorAll("select");
+      let valueprov = sel[0].options[sel[0].selectedIndex].text;
+      let valuekab = sel[1].options[sel[1].selectedIndex].text;
+      let valuekec = sel[2].options[sel[2].selectedIndex].text;
+      let valuekel = sel[3].options[sel[3].selectedIndex].text;
+      let valuesek = sel[4].options[sel[4].selectedIndex].text;
+      var inp = document.querySelectorAll("input");
+      var arr = [];
+      let objsekolah = new Object();
+      let cekinp = local.isiinp(inp);
 
-        objsekolah.provinsi = valueprov;
-        objsekolah.kabupaten = valuekab;
-        objsekolah.kecamatan = valuekec;
-        objsekolah.kelurahan = valuekel;
-        objsekolah.sekolah = valuesek;
-        objsekolah.alamat = inp[0].value;
-        objsekolah.kepsek = inp[1].value;
-        objsekolah.nip = inp[2].value;
+      if (cekinp) {
+        var promise = new Promise(function (resolve, reject) {
+          objsekolah.provinsi = valueprov;
+          objsekolah.kabupaten = valuekab;
+          objsekolah.kecamatan = valuekec;
+          objsekolah.kelurahan = valuekel;
+          objsekolah.sekolah = valuesek;
+          objsekolah.alamat = inp[0].value;
+          objsekolah.kepsek = inp[1].value;
+          objsekolah.nip = inp[2].value;
 
-        if (local.ambil("data sekolah") == null) {
-          local.simpan("data sekolah", objsekolah);
-          resolve("tersimpan");
-        }
-        else {
-          if (confirm('Anda yakin ingin menimpa data sekolah yang sudah ada?')) {
+          if (local.ambil("data sekolah") == null) {
             local.simpan("data sekolah", objsekolah);
-          } else {
-            reject("tidak tersimpan");
+            resolve("tersimpan");
           }
-        }
-      })
+          else {
+            if (confirm('Anda yakin ingin menimpa data sekolah yang sudah ada?')) {
+              local.simpan("data sekolah", objsekolah);
+            } else {
+              reject("tidak tersimpan");
+            }
+          }
+        })
 
-      promise.then(function (result) {
-        alert(result);
-      }, function (err) {
-        alert(err);
-      });
-      isitabel();
+        promise.then(function (result) {
+          alert(result);
+        }, function (err) {
+          alert(err);
+        });
+        isitabel();
+      }
     }
 
     function isitabel() {
       let td = document.getElementsByTagName('td');
       let isi = JSON.parse(local.ambil('data sekolah'));
-        td[1].innerHTML = isi.provinsi;
-        td[3].innerHTML = isi.kabupaten;
-        td[5].innerHTML = isi.kecamatan;
-        td[7].innerHTML = isi.kelurahan;
-        td[9].innerHTML = isi.sekolah;
-        td[11].innerHTML = isi.alamat;
-        td[13].innerHTML = isi.kepsek;
-        td[15].innerHTML = isi.nip;
+      td[1].innerHTML = isi.provinsi;
+      td[3].innerHTML = isi.kabupaten;
+      td[5].innerHTML = isi.kecamatan;
+      td[7].innerHTML = isi.kelurahan;
+      td[9].innerHTML = isi.sekolah;
+      td[11].innerHTML = isi.alamat;
+      td[13].innerHTML = isi.kepsek;
+      td[15].innerHTML = isi.nip;
     }
+
     isitabel();
   </script>
 </body>

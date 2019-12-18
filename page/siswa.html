@@ -12,6 +12,7 @@
 
 <body>
     <div class="wrap">
+        <h2 class="judul">Data Siswa</h2>
         <!-- no urut -->
         <div class="custom-select">
             <select id="noUrut">
@@ -50,7 +51,9 @@
     <script>
         let sel = document.querySelectorAll("select"),
             inp = document.querySelectorAll("input"),
-            tblsimpan = document.getElementById('simpan');
+            tblsimpan = document.getElementById('simpan'),
+            tbl = document.getElementsByClassName('tblsiswa')[0];
+
 
 
         try {
@@ -60,51 +63,53 @@
             }
 
             tblsimpan.addEventListener('click', function () {
+                let cekinp = local.isiinp(inp);
+                if (cekinp) {
+                    nourut = sel[0].options[sel[0].selectedIndex].text,
+                        namasiswa = inp[0].value,
+                        nisn = inp[1].value,
+                        jk = sel[1].options[sel[1].selectedIndex].text,
+                        arr = [],
+                        objsiswa = new Object();
+                    let x;
 
-                nourut = sel[0].options[sel[0].selectedIndex].text,
-                    namasiswa = inp[0].value,
-                    nisn = inp[1].value,
-                    jk = sel[1].options[sel[1].selectedIndex].text,
-                    arr = [],
-                    objsiswa = new Object();
-                let x;
+                    objsiswa.nourut = nourut;
+                    objsiswa.namasiswa = namasiswa;
+                    objsiswa.nisn = nisn;
+                    objsiswa.jk = jk;
 
-                objsiswa.nourut = nourut;
-                objsiswa.namasiswa = namasiswa;
-                objsiswa.nisn = nisn;
-                objsiswa.jk = jk;
-
-                if (local.ambil('data siswa') == null) {
-                    arr.push(objsiswa);
-                    local.simpan('data siswa', arr);
-                } else {
-                    let sdhada = JSON.parse(local.ambil('data siswa'));
-                    var lanjut = false;
-                    for (x in sdhada) {
-                        if (objsiswa.nourut == sdhada[x].nourut) {
-                            let confir = confirm('No.urut siswa ini sdh ada, Anda yakin ingin mengubahnya?');
-                            if (confir == true) {
-                                //local.hapus('data siswa');
-                                sdhada[x].nourut = objsiswa.nourut;
-                                sdhada[x].namasiswa = objsiswa.namasiswa;
-                                sdhada[x].nisn = objsiswa.nisn;
-                                sdhada[x].jk = objsiswa.jk;
-                                local.simpan('data siswa', sdhada);
+                    if (local.ambil('data siswa') == null) {
+                        arr.push(objsiswa);
+                        local.simpan('data siswa', arr);
+                    } else {
+                        let sdhada = JSON.parse(local.ambil('data siswa'));
+                        var lanjut = false;
+                        for (x in sdhada) {
+                            if (objsiswa.nourut == sdhada[x].nourut) {
+                                let confir = confirm('No.urut siswa ini sdh ada, Anda yakin ingin mengubahnya?');
+                                if (confir == true) {
+                                    //local.hapus('data siswa');
+                                    sdhada[x].nourut = objsiswa.nourut;
+                                    sdhada[x].namasiswa = objsiswa.namasiswa;
+                                    sdhada[x].nisn = objsiswa.nisn;
+                                    sdhada[x].jk = objsiswa.jk;
+                                    local.simpan('data siswa', sdhada);
+                                    lanjut = true;
+                                    break;
+                                }
                                 lanjut = true;
-                                break;
                             }
-                            lanjut = true;
-                        }
 
+                        }
+                        if (lanjut === false) {
+                            sdhada.push(objsiswa);
+                            local.simpan('data siswa', sdhada);
+                        }
                     }
-                    if (lanjut === false) {
-                        sdhada.push(objsiswa);
-                        local.simpan('data siswa', sdhada);
-                    }
+                    isicell();
+                    inp[0].value = "";
+                    inp[1].value = "";
                 }
-                isicell();
-                inp[0].value = "";
-                inp[1].value = "";
             });
         } catch{
             alert("anda belum mengisi data kelas");
@@ -113,11 +118,11 @@
 
 
         function buattabel() {
-            let tbl = document.getElementsByClassName('tblsiswa');
+            
             let isi = JSON.parse(local.ambil('data kelas'));
             let jmlsiswa = isi.jmlsiswa;
             for (let i = 1; i <= jmlsiswa; i++) {
-                let row = tbl[0].insertRow(i);
+                let row = tbl.insertRow(i);
                 let cell1 = row.insertCell(0);
                 let cell2 = row.insertCell(1);
                 let cell3 = row.insertCell(2);
@@ -127,14 +132,18 @@
         }
 
         function isicell() {
-            let cell = document.getElementsByTagName('td');
+            // let seltable = document.getElementsByTagName('td');
+            let baris = tbl.rows;
             let isi = JSON.parse(local.ambil('data siswa'));
-            let j = 5;
+            // let j = 5;
             for (let i = 0; i < isi.length; i++) {
-                cell[j].innerHTML = isi[i].namasiswa;
-                cell[j + 1].innerHTML = isi[i].nisn;
-                cell[j + 2].innerHTML = isi[i].jk;
-                j += 4;
+                baris[isi.nourut[i]].cells[1].innerHTML = isi[i].namasiswa;
+                baris[isi.nourut[i]].cells[2].innerHTML = isi[i].nisn;
+                baris[isi.nourut[i]].cells[3].innerHTML = isi[i].jk
+                // cell[j].innerHTML = isi[i].namasiswa;
+                // cell[j + 1].innerHTML = isi[i].nisn;
+                // cell[j + 2].innerHTML = isi[i].jk;
+                // j += 4;
             }
 
         }

@@ -12,6 +12,7 @@
 
 <body>
     <div class="wrap">
+        <h2 class="judul">Data Kelas</h2>
             <div class="custom-select">
                 <select id="kls">
                     <option>Pilih Kelas</option>
@@ -66,6 +67,7 @@
             let valkelas = sel[0].options[sel[0].selectedIndex].text;
             let x;
             let objkelas = new Object();
+            let cekinp = local.isiinp(inp);
 
             objkelas.kelas = valkelas;
             objkelas.jmlsiswa = inp[0].value;
@@ -76,10 +78,7 @@
                 alert('Pilih Kelas terlebih dahulu');
                 return;
             }
-
-            let cekinp = local.isiinp(inp);
-
-
+  
             if (cekinp) {
                 if (local.ambil("data kelas") == null) {
                     local.simpan("data kelas", objkelas);
